@@ -1,15 +1,27 @@
 ---
-title: My dynamic report
+title: "My Instagram advertisement engagement"
 output: html_fragment
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+library(tidyverse)
 
+logged_data <- read.csv("~/Stat220/Project 2/Stat220 (Responses) - Form Responses 1.csv")
+latest_data <- logged_data %>%
+  rename(posts_scrolled = 'How.many.posts.did.you.scroll.to.get.to.an.advertisement.',
+         useful_rating = 'On.a.scale.of.1.10.how.useful.was.the.advertisement.')
+
+latest_data
 ```
 
 ```{css}
-
+.bar-plot {
+  margin-bottom: 30px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+}
 ```
 
 ## What's going on with this data?
@@ -17,11 +29,42 @@ knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
 You need to change the contents of this Rmd! Replace the R code and markdown give below in this template document.
 
 ```{r}
-pets <- c("cat", "dog", "turtle", "rabbit")
-best_pet <- pets[1]
+summary_stats <- list(
+  avg_posts = mean(latest_data$posts_scrolled, na.rm = TRUE),
+  avg_rating = mean(latest_data$useful_rating, na.rm = TRUE),
+  min_posts = min(latest_data$posts_scrolled, na.rm = TRUE),
+  max_rating = max(latest_data$useful_rating, na.rm = TRUE)
+)
 
+summary_stats
+```
+```{r}
+ggplot(latest_data, aes(x = posts_scrolled)) +
+  geom_bar(fill = "steelblue") +
+  labs(title = "Distribution of Posts Scrolled Before Seeing Ads",
+       x = "Number of Posts Scrolled",
+       y = "Count")
+
+# Bar Chart 2: Distribution of usefulness ratings
+ggplot(latest_data, aes(x = useful_rating)) +
+  geom_bar(fill = "coral") +
+  labs(title = "Distribution of Advertisement Usefulness Ratings",
+       x = "Usefulness Rating (1-10)",
+       y = "Count")
+
+# Bar Chart 3: Average usefulness by posts scrolled (for exploration)
+ggplot(latest_data, aes(x = factor(posts_scrolled), y = useful_rating)) +
+  geom_bar(stat = "summary", fun = "mean", fill = "purple") +
+  labs(title = "Average Usefulness by Posts Scrolled",
+       x = "Number of Posts Scrolled",
+       y = "Average Usefulness Rating")
 ```
 
-The best pet to have is a `r best_pet` of course!
+
+This report analyses how I interact with ads on my Instagram page by comparing how many posts I have to scroll through to get an ad and how useful/targeted that ad is to me personally. 
+
+Most of the ads are not useful for me at all as they are just mobile games or travel stuff, I don't have any money to travel ANY TIME SOON. But the reason why I might be trageted with these ads might be because I went to India during the holidays and spent some time in Singapore as well. With the mobile ads, maybe it's because the amount of Clash Royal I play.
+
+Also another key finding is that it doesn't take long to receive an ad on average after scrolling pat 3 posts I'm hit with an ad. This might be because most on the posts that I'm seeing aren't by people I follow rather just random meme accounts that are just popping on my feed. This might be different if I'm follow more accounts that actually post stuff rather than 99% of my followings being my friends and family and the 1% is news/sport/gaming pages.
 
 ![](https://c.tenor.com/-qBsG1HwR4oAAAAC/tenor.gif)
