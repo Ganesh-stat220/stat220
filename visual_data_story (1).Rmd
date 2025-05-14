@@ -1,0 +1,65 @@
+---
+title: How does my phone activity affect my main Istagram account and a ghost account.
+author: Ganesh Digamarthi
+date: 14/05/2024
+output: html_document
+---
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+```
+
+```{js}
+$(function() {
+  $(".level2").css('visibility', 'hidden');
+  $(".level2").first().css('visibility', 'visible');
+  $(".container-fluid").height($(".container-fluid").height() + 300);
+  $(window).on('scroll', function() {
+    $('h2').each(function() {
+      var h2Top = $(this).offset().top - $(window).scrollTop();
+      var windowHeight = $(window).height();
+      if (h2Top >= 0 && h2Top <= windowHeight / 2) {
+        $(this).parent('div').css('visibility', 'visible');
+      } else if (h2Top > windowHeight / 2) {
+        $(this).parent('div').css('visibility', 'hidden');
+      }
+    });
+  });
+})
+```
+
+```{css}
+body {
+  background-color: #FFF5F5;  /* Soft pink background */
+  font-family: 'Arial', sans-serif;
+}
+.header {
+  color: #7A0177;  /* Deep purple for headers */
+}
+.plot-caption {
+  font-style: italic;
+  color: #666;
+```
+
+## Comparing how usefull the ads are from my main account and the ghost account
+
+![Data comparision](C:/Users/nagak/Documents/Stat220/Project 4/barplot.png)
+This plot is like a head-to-head battle between my two Instagram accounts. The peachy colour represents my main account and as you can tell the advertisements I get in my main account are all super useless. One main reason why this might is that most of the ads from my main account are for games, mobile games more specifically which I don't play at all. I possibly clicked on one of those ads in the past which explains why I get so many of them.
+
+In my ghost account which is really an account I made 4 years ago but don't use anymore I'm getting a lot more ads that makes me go "oooo this is hella nice might be useful for me". In reality most of the ads in my ghost account are about health care which I was really into when I was using this account 3-4 years ago and electronic ads such as new phone releases or TV sales or electronic store promotional ads which also makes sense as I was trying to look for good PC components as I was trying to build my own PC. But of course I'd rather prefer to have healthy snack recipes compared to a gameplay of an ad that's not even in the game  
+
+
+## How often are you receiving memes?
+
+![Normal posts](C:/Users/nagak/Documents/Stat220/Project 4/instagram_compare.gif)
+This data plot shows the distribution of different types of normal posts that shows up on my feed. Most of them are memes as memes are the most media content I consume on Instagram whether it's the accounts I follow or posts I get suggested. Then it's sports/gaming as I'm pretty into football and F1 so I get a couple posts from the players/club accounts and lastly it's education/news as I only follow 4-5 Education/News accounts and that too only on my main account so there isn't that many here.
+
+## How useful are the advertisements?
+
+![Average usefulness by ad category](C:/Users/nagak/Documents/Stat220/Project 4/point_plot.png)
+This data set shows how useful the average usefulness of an advertisement according to it's category. Like I said before the most useful ads for me have been from the "Beauty and Health care" category but there aren't that many of these becasuse all of them were from my second response/ghost account. Not very surprising that the most useless and most number of responses are from Games as my main account if filled with these ads.
+
+
+
